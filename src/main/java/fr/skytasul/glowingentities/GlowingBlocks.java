@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -57,7 +58,7 @@ public class GlowingBlocks implements Listener {
 		entities.plugin.getServer().getPluginManager().registerEvents(this, entities.plugin);
 		if (!entities.enabled)
 			entities.enable();
-		glowing = new HashMap<>();
+		glowing = new ConcurrentHashMap<>();
 		enabled = true;
 	}
 
@@ -217,7 +218,7 @@ public class GlowingBlocks implements Listener {
 	private record PlayerData(@NotNull Player player, @NotNull Map<Location, GlowingBlockData> datas) {
 
 		public PlayerData(@NotNull Player player) {
-			this(player, new HashMap<>());
+			this(player, new ConcurrentHashMap<>());
 		}
 
 	}

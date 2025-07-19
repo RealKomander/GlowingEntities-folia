@@ -27,6 +27,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -72,7 +73,7 @@ public class GlowingEntities implements Listener {
 			throw new IllegalStateException("The Glowing Entities API has already been enabled.");
 
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
-		glowing = new HashMap<>();
+		glowing = new ConcurrentHashMap<>();
 		uid = ThreadLocalRandom.current().nextInt(Integer.MAX_VALUE);
 		enabled = true;
 	}
@@ -796,13 +797,13 @@ public class GlowingEntities implements Listener {
 								// editing a bundle packet is annoying, so we'll let it go to the player
 								// and then send a metadata packet containing the correct glowing flag.
 
-								Bukkit.getScheduler().runTaskLaterAsynchronously(playerData.instance.plugin, () -> {
+								playerData.player.getScheduler().run(playerData.instance.plugin, scheduledTask -> {
 									try {
 										updateGlowingState(glowingData);
 									} catch (ReflectiveOperationException e) {
 										e.printStackTrace();
 									}
-								}, 1L);
+								}, null);
 								return;
 							}
 						}
