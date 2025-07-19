@@ -1,7 +1,9 @@
-# reflection-remapper | 1.21.4 741-789
+# reflection-remapper | AVAILABLE VERSIONS
+# reflection-remapper | 1.21.4 3-51
+# reflection-remapper | AVAILABLE VERSIONS
 net.minecraft.world.entity.EntityType -> net.minecraft.world.entity.EntityTypes:
-    MARKER -> aE
-    SHULKER -> be
+    MARKER -> aC
+    SHULKER -> bb
 net.minecraft.network.Connection -> net.minecraft.network.NetworkManager:
     channel -> n
 net.minecraft.network.protocol.game.ClientboundSetPlayerTeamPacket -> net.minecraft.network.protocol.game.PacketPlayOutScoreboardTeam:
@@ -14,7 +16,7 @@ net.minecraft.network.syncher.SynchedEntityData$DataValue -> net.minecraft.netwo
     serializer() -> b
     value() -> c
 net.minecraft.server.level.ServerPlayer -> net.minecraft.server.level.EntityPlayer:
-    connection -> g
+    connection -> f
 net.minecraft.world.scores.Team$CollisionRule -> net.minecraft.world.scores.ScoreboardTeamBase$EnumTeamPush:
     NEVER -> b
 net.minecraft.ChatFormatting -> net.minecraft.EnumChatFormat:
@@ -38,7 +40,7 @@ net.minecraft.network.syncher.SynchedEntityData -> net.minecraft.network.syncher
 net.minecraft.world.scores.Scoreboard -> net.minecraft.world.scores.Scoreboard:
 net.minecraft.network.syncher.SynchedEntityData$DataItem -> net.minecraft.network.syncher.DataWatcher$Item:
 net.minecraft.world.entity.Entity -> net.minecraft.world.entity.Entity:
-    DATA_SHARED_FLAGS_ID -> az
+    DATA_SHARED_FLAGS_ID -> am
     getEntityData() -> au
 net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket -> net.minecraft.network.protocol.game.PacketPlayOutEntityMetadata:
     id -> c

@@ -5,7 +5,7 @@
 
 	<groupId>fr.skytasul</groupId>
 	<artifactId>glowingentities</artifactId>
-	<version>1.4.6.8</version>
+	<version>1.4.6.9</version>
 
 	<name>GlowingEntities</name>
 	<description>A Spigot util to easily make entities glow.</description>
@@ -54,6 +54,7 @@
 		</repository>
 	</repositories>
 
+	<!--		change "provided" to "compile" and reload the project to use mappings generator-->
 	<dependencies>
 		<dependency>
 			<groupId>io.papermc.paper</groupId>
@@ -69,6 +70,7 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!--		change "provided" to "compile" and reload the project to use mappings generator-->
 		<dependency>
 			<groupId>fr.skytasul</groupId>
 			<artifactId>reflection-mappings-shrieker</artifactId>
@@ -76,6 +78,7 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!--		change "provided" to "compile" and reload the project to use mappings generator-->
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
@@ -119,6 +122,26 @@
 					</execution>
 				</executions>
 			</plugin>
+<!--			enable this to build mappings-->
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.mojo</groupId>-->
+<!--				<artifactId>build-helper-maven-plugin</artifactId>-->
+<!--				<version>3.5.0</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>add-source</id>-->
+<!--						<phase>generate-sources</phase>-->
+<!--						<goals>-->
+<!--							<goal>add-source</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<sources>-->
+<!--								<source>src/mappingsgen/java</source>-->
+<!--							</sources>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
