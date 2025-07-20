@@ -358,7 +358,8 @@ public class GlowingEntities implements Listener {
 
 		// Entities
 		protected static Object shulkerEntityType;
-		public static Object markerEntityType;
+		public static Object magmaCubeEntityType;
+		private static Object watcherObjectSlimeSize;
 		private static Constructor<?> packetAddEntity;
 		private static Constructor<?> packetRemove;
 		private static Object vec3dZero;
@@ -436,6 +437,23 @@ public class GlowingEntities implements Listener {
 					logger.log(Level.SEVERE, errorMsg, ex);
 				}
 			}
+		}
+
+		public static void setEntitySize(Player player, int entityId, int size) throws ReflectiveOperationException {
+			List<Object> dataItems = new ArrayList<>(1);
+			dataItems.add(watcherItemConstructor != null ?
+					watcherItemConstructor.newInstance(watcherObjectSlimeSize, size) :
+					watcherBCreator.invoke(null, watcherObjectSlimeSize, size));
+
+			Object packet;
+			if (version.isBefore(1, 19, 3)) {
+				packet = packetMetadataConstructor.newInstance(entityId, watcherDummy, false);
+				packetMetadataItems.set(packet, dataItems);
+			} else {
+				packet = packetMetadataConstructor.newInstance(entityId, dataItems);
+			}
+			packets.put(packet, dummy);
+			sendPackets(player, packet);
 		}
 
 		protected static void loadReflection(@NotNull ReflectionAccessor reflection, @NotNull Version version)
@@ -548,7 +566,9 @@ public class GlowingEntities implements Listener {
 			/* Entities */
 
 			shulkerEntityType = entityTypesClass.getField("SHULKER").get(null);
-			markerEntityType = entityTypesClass.getField("MARKER").get(null);
+			magmaCubeEntityType = entityTypesClass.getField("MAGMA_CUBE").get(null);
+			ClassAccessor slimeClass = getNMSClass(reflection, "world.entity.monster", "Slime");
+			watcherObjectSlimeSize = slimeClass.getField("DATA_SIZE_ID").get(null);
 
 			ClassAccessor vec3dClass = getNMSClass(reflection, "world.phys", "Vec3");
 			vec3dZero = vec3dClass.getConstructor(double.class, double.class, double.class).newInstance(0d, 0d, 0d);

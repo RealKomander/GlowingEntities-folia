@@ -225,7 +225,7 @@ public class GlowingBlocks implements Listener {
 
 	private class GlowingBlockData {
 
-		private static final byte FLAGS = 1 << 5; // invisibility flag
+		private static final byte FLAGS = (1 << 5) | (1 << 4); // Invisibility + Silent flags
 		private static final AtomicInteger ENTITY_ID_COUNTER =
 				new AtomicInteger(ThreadLocalRandom.current().nextInt(1_000_000, 2_000_000_000));
 
@@ -251,11 +251,14 @@ public class GlowingBlocks implements Listener {
 
 		public void spawn() throws ReflectiveOperationException {
 			init();
+			// Use the Magma Cube entity
+			Packets.createEntity(player, entityId, entityUuid, Packets.magmaCubeEntityType, location);
 
-			// Use the non-solid Marker entity instead of a Shulker
-			Packets.createEntity(player, entityId, entityUuid, Packets.markerEntityType, location);
+			// Set its flags (invisible and silent)
 			Packets.setMetadata(player, entityId, FLAGS, false);
-			// this will take care of refreshing the color thanks to the packet handler in GlowingEntities
+
+			// Set its size to 0 to make it invisible and non-colliding
+			Packets.setEntitySize(player, entityId, 0);
 		}
 
 		public void remove() throws ReflectiveOperationException {
