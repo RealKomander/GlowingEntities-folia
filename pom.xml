@@ -5,7 +5,7 @@
 
 	<groupId>fr.skytasul</groupId>
 	<artifactId>glowingentities</artifactId>
-	<version>1.4.6.9</version>
+	<version>1.4.6.10</version>
 
 	<name>GlowingEntities</name>
 	<description>A Spigot util to easily make entities glow.</description>
@@ -97,6 +97,7 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>3.2.0</version>
 				<executions>

@@ -252,7 +252,8 @@ public class GlowingBlocks implements Listener {
 		public void spawn() throws ReflectiveOperationException {
 			init();
 
-			Packets.createEntity(player, entityId, entityUuid, Packets.shulkerEntityType, location);
+			// Use the non-solid Marker entity instead of a Shulker
+			Packets.createEntity(player, entityId, entityUuid, Packets.markerEntityType, location);
 			Packets.setMetadata(player, entityId, FLAGS, false);
 			// this will take care of refreshing the color thanks to the packet handler in GlowingEntities
 		}

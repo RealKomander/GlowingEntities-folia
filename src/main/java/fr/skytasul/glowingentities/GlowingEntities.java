@@ -358,6 +358,7 @@ public class GlowingEntities implements Listener {
 
 		// Entities
 		protected static Object shulkerEntityType;
+		public static Object markerEntityType;
 		private static Constructor<?> packetAddEntity;
 		private static Constructor<?> packetRemove;
 		private static Object vec3dZero;
@@ -547,6 +548,7 @@ public class GlowingEntities implements Listener {
 			/* Entities */
 
 			shulkerEntityType = entityTypesClass.getField("SHULKER").get(null);
+			markerEntityType = entityTypesClass.getField("MARKER").get(null);
 
 			ClassAccessor vec3dClass = getNMSClass(reflection, "world.phys", "Vec3");
 			vec3dZero = vec3dClass.getConstructor(double.class, double.class, double.class).newInstance(0d, 0d, 0d);
